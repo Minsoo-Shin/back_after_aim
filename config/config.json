@@ -1,17 +1,17 @@
 {
   "development": {
-    "username": "admin",
-    "password": "aimjungle!2345",
-    "database": "aim_production",
-    "host": "db-aim.cv48si1lach8.us-east-2.rds.amazonaws.com",
+    "username": "root",
+    "password": "Qwewe123",
+    "database": "test",
+    "host": "127.0.0.1",
     "dialect": "mysql",
     "logging": false
   },
   "test": {
-    "username": "admin",
-    "password": "aimjungle!2345",
-    "database": "aim_production",
-    "host": "db-aim.cv48si1lach8.us-east-2.rds.amazonaws.com",
+    "username": "root",
+    "password": "Qwewe123",
+    "database": "test",
+    "host": "127.0.0.1",
     "dialect": "mysql",
     "logging": false
   },

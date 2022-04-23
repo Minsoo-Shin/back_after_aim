@@ -79,16 +79,7 @@ let charMap = {}; //character information (x,y 등등)
 let groupName = 0;
 const MAXIMUM = 10; //Call maximum
 let roomObjArr = {
-  // {
-  //   roomName,
-  //   currentNum,
-  //   users: [
-  //     {
-  //       socketId,
-  //       nickname,
-  //     },
-  //   ],
-  // },
+  //   roomName : [user1, user2,,,]
 };
 let groupObjArr = [
   // {
@@ -1020,36 +1011,60 @@ function makeGroup(socket) {
     console.log("makeGroup함수", e);
   }
 }
-
+//groupObjArr 배열에서 groupName에 해당하는 인덱스값 반환
+function getGroupIdx(groupName){
+  for (let index=0; index<groupObjArr; index++){
+    if (groupObjArr[index].groupName === groupName)
+      return index;
+  }
+}
 //when callee join the room
 function joinGroup(groupName, socket, nickname) {
   try {
-    console.log("joinGroup");
-    for (let i = 0; i < groupObjArr.length; ++i) {
-      console.log(
-        `${i} 방 안에 있는 모든 유저의 소켓ID : `,
-        groupObjArr[i].users
-      );
-      console.log(groupObjArr[i], groupName);
-      if (groupObjArr[i].groupName === groupName) {
-        // Reject join the room
-        // if (groupObjArr[i].users.length >= MAXIMUM) {
-        //   socket.emit("reject_join");
-        //   return;
-        // }
-        //Join the room
-        groupObjArr[i].users.push({
-          socketId: socket.id,
-          nickname,
-        });
-
-        socket.join(groupName);
-        socket.emit("accept_join", groupObjArr[i].groupName);
-      }
-    }
+    let groupIdx = getGroupIdx(groupName)
+    
+    //Add socket info to array in groupObj 
+    groupObjArr[groupIdx].users.push({
+      socketId: socket.id,
+      nickname,
+    });
+    
+    //Join the room
+    socket.join(groupName);
+    socket.emit("accept_join", groupObjArr[i].groupName);
   } catch (e) {
     console.log("joinGroup함수", e);
   }
 }
+// //when callee join the room
+// function joinGroup(groupName, socket, nickname) {
+//   try {
+//     // console.log("joinGroup");
+//     for (let i = 0; i < groupObjArr.length; ++i) {
+//       // console.log(
+//       //   `${i} 방 안에 있는 모든 유저의 소켓ID : `,
+//       //   groupObjArr[i].users
+//       // );
+//       // console.log(groupObjArr[i], groupName);
+//       if (groupObjArr[i].groupName === groupName) {
+//         // Reject join the room
+//         // if (groupObjArr[i].users.length >= MAXIMUM) {
+//         //   socket.emit("reject_join");
+//         //   return;
+//         // }
+//         //Join the room
+//         groupObjArr[i].users.push({
+//           socketId: socket.id,
+//           nickname,
+//         });
+
+//         socket.join(groupName);
+//         socket.emit("accept_join", groupObjArr[i].groupName);
+//       }
+//     }
+//   } catch (e) {
+//     console.log("joinGroup함수", e);
+//   }
+// }
 
 module.exports = app;

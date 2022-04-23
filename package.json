@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "jest --runInBand --detectOpenHandles"
   },
   "engines": {
     "node": "14.18.1",
@@ -21,6 +22,7 @@
     "http": "^0.0.1-security",
     "http-errors": "~1.6.3",
     "httpolyglot": "^0.1.2",
+    "iconv-lite": "^0.6.3",
     "jade": "~1.11.0",
     "jsonwebtoken": "^8.5.1",
     "loadsh": "^0.0.4",
@@ -38,6 +40,8 @@
     "socket.io": "^4.4.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
   }
 }
